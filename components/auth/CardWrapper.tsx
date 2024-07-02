@@ -1,4 +1,3 @@
-
 'use-client'
 import {BackButton} from "@/components/auth/BackButton";
 import {Social} from "@/components/auth/social";
@@ -22,7 +21,7 @@ export const CardWrapper = ({
     backButtonLabel,
     backButtonHref,
     showSocial
-}) => {
+}: CardWrapperProps) => {
     const headerLabelTextMain = "Auth Header Text"
 
     return (
