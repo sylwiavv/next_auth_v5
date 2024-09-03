@@ -14,6 +14,7 @@ import {FormSuccess} from "@/components/auth/FormSuccess";
 import {login} from "@/actions/login";
 import {useTransition} from "react";
 import {register} from "@/actions/register";
+import {SeoH1} from "@/ui/SeoH1";
 
 export const RegisterForm = () => {
     const [isPending, startTransition] = useTransition()
@@ -54,8 +55,6 @@ export const RegisterForm = () => {
             })
         })
     }
-
-    console.log(success, "success");
 
     return (
         <CardWrapper

@@ -3,6 +3,8 @@ import {Button} from "@/components/ui/button";
 import {Poppins} from "next/font/google";
 import {cn} from "@/lib/utils"
 import {LoginButton} from "@/components/auth/login-button";
+import {SeoH1} from "@/ui/SeoH1";
+import React from "react";
 
 const font = Poppins({
     subsets: ["latin"],
@@ -16,7 +18,6 @@ export default function Home() {
             <div className="space-y-6 text-center">
                 <h1 className={cn("text-6xl font-semibold text-white drop-shadow-md", font.className)}>Auth</h1>
                 <p>Simple auth service</p>
-
                 <div>
                     <LoginButton>
                         <Button variant="secondary" size="lg">Sign in</Button>
