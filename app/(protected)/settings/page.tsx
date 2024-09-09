@@ -5,16 +5,19 @@ import {Button} from "@/components/ui/button";
 const Settings = async () => {
     const session = await auth()
 
+    const user = JSON.stringify(session)
+
     console.log(session, "SESSION");
     return (
-        <div>{JSON.stringify(session)}
+        <div className="p-3">
+            {user}
             <form action={
                 async () => {
                     "use server";
                     await signOut()
                 }
             }>
-                <Button type="submit">Sign out</Button>
+                <Button className="my-2" variant="secondary" type="submit">Sign out</Button>
             </form>
         </div>
     );

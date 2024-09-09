@@ -17,7 +17,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body style={{backgroundColor: "#1a1f29", color: "#ccd2da"}} className={inter.className}>{children}</body>
     </html>
   );
 }
