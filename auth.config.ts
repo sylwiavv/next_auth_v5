@@ -9,8 +9,6 @@ export default {
         Credentials({
             async authorize(credentails) {
                 const validatedFields = LoginSchema.safeParse(credentails);
-                console.log(validatedFields, "validatedFields")
-
                 if (validatedFields.success) {
                     const {email, password} = validatedFields.data
 
