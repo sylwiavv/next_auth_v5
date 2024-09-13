@@ -1,117 +1,131 @@
-'use client'
+"use client";
 
-import React, {useState} from 'react';
-import {CardWrapper} from "@/components/auth/CardWrapper";
 import * as z from "zod";
-import {RegisterSchema} from "@/schemas";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {FormError} from "@/components/auth/FormError";
-import {FormSuccess} from "@/components/auth/FormSuccess";
-import {login} from "@/actions/login";
-import {useTransition} from "react";
-import {register} from "@/actions/register";
-import {SeoH1} from "@/ui/SeoH1";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { RegisterSchema } from "@/schemas";
+import { Input } from "@/components/ui/input";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { CardWrapper } from "@/components/auth/CardWrapper"
+import { Button } from "@/components/ui/button";
+import { FormError } from "@/components/auth/FormError";
+import { FormSuccess } from "@/components/auth/FormSuccess";
+import { register } from "@/actions/register";
 
 export const RegisterForm = () => {
-    const [isPending, startTransition] = useTransition()
-    const [success, setSuccess] = useState<string | undefined>()
-    const [error, setError] = useState<string | undefined>()
-
-    const cardWrapperPropsValues = {
-        headerLabel: "Create an account",
-        backButtonHref: "/auth/login",
-        backButtonLabel: "Already have an account",
-        showSocial: true
-    };
-
-    const {headerLabel, backButtonLabel, backButtonHref, showSocial} = cardWrapperPropsValues;
+    const [error, setError] = useState<string | undefined>("");
+    const [success, setSuccess] = useState<string | undefined>("");
+    const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
         defaultValues: {
             email: "",
             password: "",
-            name: ""
-        }
+            name: "",
+        },
     });
 
     const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
-        setError("")
-        setSuccess("")
+        setError("");
+        setSuccess("");
 
         startTransition(() => {
-            register(values).then((data) => {
-                setError(data?.error)
-                setSuccess(data?.success)
-
-                if (data?.success) {
-                    console.log(form);
-                    form.reset()
-                }
-            })
-        })
-    }
+            register(values)
+                .then((data) => {
+                    setError(data.error);
+                    setSuccess(data.success);
+                });
+        });
+    };
 
     return (
         <CardWrapper
-            headerLabel={headerLabel}
-            backButtonHref={backButtonHref}
-            backButtonLabel={backButtonLabel}
-            showSocial={showSocial}
+            headerLabel="Create an account"
+            backButtonLabel="Already have an account?"
+            backButtonHref="/auth/login"
+            showSocial
         >
             <Form {...form}>
-                <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                >
                     <div className="space-y-4">
                         <FormField
                             control={form.control}
                             name="name"
-                            render={({field}) => (
+                            render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input disabled={isPending} {...field} />
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            placeholder="John Doe"
+                                        />
                                     </FormControl>
                                     <FormMessage />
-                                </FormItem>)}
+                                </FormItem>
+                            )}
                         />
-
                         <FormField
                             control={form.control}
                             name="email"
-                            render={({field}) => (
+                            render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input disabled={isPending}  {...field} placeholder="ex@gmail.com" type="email" />
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            placeholder="john.doe@example.com"
+                                            type="email"
+                                        />
                                     </FormControl>
                                     <FormMessage />
-                                </FormItem>)}
+                                </FormItem>
+                            )}
                         />
                         <FormField
                             control={form.control}
                             name="password"
-                            render={({field}) => (
+                            render={({ field }) => (
                                 <FormItem>
                                     <FormLabel>Password</FormLabel>
                                     <FormControl>
-                                        <Input disabled={isPending} {...field} placeholder="*******" type="password" />
+                                        <Input
+                                            {...field}
+                                            disabled={isPending}
+                                            placeholder="******"
+                                            type="password"
+                                        />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
-                            )}/>
-
-
+                            )}
+                        />
                     </div>
-                    <FormError message={error as string} />
-                    <FormSuccess message={success as string} />
-
-                    <Button disabled={isPending}  type="submit" className="w-full">Register</Button>
+                    <FormError message={error} />
+                    <FormSuccess message={success} />
+                    <Button
+                        disabled={isPending}
+                        type="submit"
+                        className="w-full"
+                    >
+                        Create an account
+                    </Button>
                 </form>
             </Form>
         </CardWrapper>
     );
-}
+};

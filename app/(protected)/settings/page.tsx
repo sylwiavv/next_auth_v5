@@ -6,8 +6,6 @@ const Settings = async () => {
     const session = await auth()
 
     const user = JSON.stringify(session)
-
-    console.log(session, "SESSION");
     return (
         <div className="p-3">
             {user}
