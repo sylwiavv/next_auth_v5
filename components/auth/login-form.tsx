@@ -43,7 +43,8 @@ export const LoginForm = () => {
         startTransition(() => {
             login(values).then((data) => {
                 setError(data?.error)
-                setSuccess(data?.success)
+                // TODO: Add when we add 2FA
+                // setSuccess(data?.success)
             })
         })
     }
@@ -53,8 +54,7 @@ export const LoginForm = () => {
             headerLabel={headerLabel}
             backButtonHref={backButtonHref}
             backButtonLabel={backButtonLabel}
-            showSocial={showSocial}
-        >
+            showSocial={showSocial}>
             <Form {...form}>
                 <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="space-y-4">
