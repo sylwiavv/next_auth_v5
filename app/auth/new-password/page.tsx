@@ -1,9 +1,10 @@
 import React from 'react';
+import {NewPasswordForm} from "@/components/auth/NewPassword/NewPasswordForm";
 
-const Page = () => {
+const NewPasswordPage = () => {
     return (
-        <div>Page</div>
+        <NewPasswordForm />
     );
 }
 
-export default Page
+export default NewPasswordPage;
