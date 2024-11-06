@@ -15,11 +15,14 @@ import {login} from "@/actions/login";
 import {useTransition} from "react";
 import Link from "next/link";
 import {useSearchParams} from "next/navigation";
+import LoginFormFields from "@/components/auth/LoginFormFields";
+import LoginFormTwoFactorFields from "@/components/auth/LoginFormTwoFactorFields";
 
 export const LoginForm = () => {
     const searchParams = useSearchParams();
-    const urlError =  searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : ""
+    const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Email already in use with different provider" : ""
 
+    const [showTwoFactor, setShowTwoFactor] = useState(false)
     const [isPending, startTransition] = useTransition()
     const [success, setSuccess] = useState<string | undefined>()
     const [error, setError] = useState<string | undefined>()
@@ -37,7 +40,8 @@ export const LoginForm = () => {
         resolver: zodResolver(LoginSchema),
         defaultValues: {
             email: "",
-            password: ""
+            password: "",
+            code: ""
         }
     });
 
@@ -46,10 +50,28 @@ export const LoginForm = () => {
         setSuccess("")
 
         startTransition(() => {
-            login(values).then((data) => {
-                setError(data?.error)
-                // TODO: Add when we add 2FA
-                setSuccess(data?.success)
+            login(values)
+                .then((data) => {
+                    if (data?.error) {
+                        form.reset();
+                        setError(data.error)
+                    }
+
+                    if (data?.success) {
+                        form.reset();
+                        setSuccess(data.success)
+                    }
+
+                    if (data?.twoFactor) {
+                        setShowTwoFactor(true)
+                    }
+                    // setError(data?.error)
+                    // // TODO: Add when we add 2FA
+                    // setSuccess(data?.success)
+
+                    console.log(data, "showTwoFactor");
+                }).catch(() => {
+                setError("Something went wrong")
             })
         })
     }
@@ -63,38 +85,14 @@ export const LoginForm = () => {
             <Form {...form}>
                 <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
                     <div className="space-y-4">
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <Input disabled={isPending}  {...field} placeholder="ex@gmail.com" type="email" />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>)}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({field}) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input disabled={isPending} {...field} placeholder="*******" type="password" />
-                                    </FormControl>
-                                    <Button variant="link" size="sm" asChild className="px-0 font-normal">
-                                        <Link href="/auth/reset" className="text-gray-500">Forgot password?</Link>
-                                    </Button>
-                                    <FormMessage />
-                                </FormItem>
-                            )}/>
+                        {!showTwoFactor && <LoginFormFields form={form} isPending={isPending}/>}
+                        {showTwoFactor && <LoginFormTwoFactorFields form={form} isPending={isPending}/>}
                     </div>
-                    <FormError message={error as string || urlError} />
-                    <FormSuccess message={success as string} />
 
-                    <Button disabled={isPending}  type="submit" className="w-full">Login</Button>
+                    <FormError message={error as string || urlError}/>
+                    <FormSuccess message={success as string}/>
+
+                    <Button disabled={isPending} type="submit" className="w-full">{showTwoFactor ? "Confirm" : "Login"}</Button>
                 </form>
             </Form>
         </CardWrapper>
