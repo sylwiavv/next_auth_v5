@@ -9,7 +9,7 @@ export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
     pages: {
         signIn: "/auth/login",
         error: "/auth/error"
-    },
+        },
     events: {
         async linkAccount({ user }) {
             await db.user.update({
@@ -18,6 +18,7 @@ export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
             })
         }
     },
+    
     callbacks: {
         // async signIn({user}) {
         //     const existingUser = await getUserById(user.id);
@@ -36,7 +37,7 @@ export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
                 return true
             }
 
-            const existingUser = await getUserById(user.id);
+            const existingUser = await getUserById(user.id as s);
 
             // Prevent SignIn without email verification
             if (!existingUser?.emailVerified) {
