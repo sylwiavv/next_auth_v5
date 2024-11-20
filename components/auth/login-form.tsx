@@ -1,22 +1,19 @@
 'use client'
 
-import React, {useState} from 'react';
-import {CardWrapper} from "@/components/auth/CardWrapper";
-import * as z from "zod";
-import {LoginSchema} from "@/schemas";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {FormError} from "@/components/auth/FormError";
-import {FormSuccess} from "@/components/auth/FormSuccess";
-import {login} from "@/actions/login";
-import {useTransition} from "react";
-import Link from "next/link";
-import {useSearchParams} from "next/navigation";
+import { login } from "@/actions/login";
+import { CardWrapper } from "@/components/auth/CardWrapper";
+import { FormError } from "@/components/auth/FormError";
+import { FormSuccess } from "@/components/auth/FormSuccess";
 import LoginFormFields from "@/components/auth/LoginFormFields";
 import LoginFormTwoFactorFields from "@/components/auth/LoginFormTwoFactorFields";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { LoginSchema } from "@/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useSearchParams } from "next/navigation";
+import { useState, useTransition } from 'react';
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 export const LoginForm = () => {
     const searchParams = useSearchParams();
@@ -68,8 +65,6 @@ export const LoginForm = () => {
                     // setError(data?.error)
                     // // TODO: Add when we add 2FA
                     // setSuccess(data?.success)
-
-                    console.log(data, "showTwoFactor");
                 }).catch(() => {
                 setError("Something went wrong")
             })

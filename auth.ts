@@ -1,15 +1,14 @@
-import NextAuth from "next-auth"
-import { PrismaAdapter } from "@auth/prisma-adapter"
-import {db} from "@/lib/db";
-import authConfig from "@/auth.config"
-import {getUserById} from "@/data/user";
-import {getTwoFactorConfirmationByUserId} from "@/data/two-factor-confirmation";
+import authConfig from "@/auth.config";
+import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
+import { getUserById } from "@/data/user";
+import { db } from "@/lib/db";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import NextAuth from "next-auth";
 
 export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
     pages: {
         signIn: "/auth/login",
-        error: "/auth/error"
-        },
+        error: "/auth/error"        },
     events: {
         async linkAccount({ user }) {
             await db.user.update({

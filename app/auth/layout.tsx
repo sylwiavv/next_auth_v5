@@ -5,7 +5,7 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout = ({children}: AuthLayoutProps) => (
-    <div className="flex h-full flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400 to-blue-800">{children}</div>
+    <div className="flex h-full flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-800 to-gray-1000">{children}</div>
     
 );
 
