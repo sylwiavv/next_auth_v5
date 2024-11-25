@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar } from "../_components/Navbar/Navbar";
+import Task from "../task/page";
 
 interface ProtectedLayoutProps {
   children: React.ReactNode;
