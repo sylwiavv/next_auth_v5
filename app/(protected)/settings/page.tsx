@@ -26,9 +26,8 @@
 "use client";
 // CLIENT COMPONENT
 import { logout } from "@/actions/logout";
+import UserAvatar from "@/components/auth/UserAvatar/UserAvatar";
 import { Button } from "@/components/ui/button";
-import { useCurrentUser } from "@/hooks/useCurrentUser";
-import Image from "next/image";
 import ProtectedLayout from "./ProtectedLayout";
 
 const Settings = () => {
@@ -36,17 +35,18 @@ const Settings = () => {
   const onClick = () => {
     logout();
   };
+  
 
   return (
     <ProtectedLayout>
-
       <div className="break-all flex flex-col">
+        <UserAvatar imageSrc="https://i.pinimg.com/736x/86/cf/d0/86cfd0cd2e5bb21b377b972f9931e939.jpg" />
+
         {/* <form> */}
-          <Button className="my-2" variant="secondary" onClick={onClick} >
-            Sign out
-          </Button>
+        <Button className="my-2" variant="secondary" onClick={onClick}>
+          Sign out
+        </Button>
         {/* </form> */}
-        
       </div>
     </ProtectedLayout>
   );
