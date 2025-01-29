@@ -2,10 +2,9 @@ import Link from "next/link";
 
 'use-client'
 
-import {Button} from "@/components/ui/button";
-import React from 'react';
+import { Button } from "@/components/ui/button";
 
-interface BackButton {
+interface BackButtonProps {
     label: string,
     href: string
 }

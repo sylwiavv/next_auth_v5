@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 export const Navbar = () => {
   const currentUser = useCurrentUser();

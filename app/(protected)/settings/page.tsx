@@ -35,7 +35,28 @@ const Settings = () => {
   const onClick = () => {
     logout();
   };
-  
+
+  const inovices = [
+    { number: "AB", ammount: 3000, companyId: 3 },
+    { number: "AC", ammount: 200, companyId: 1 },
+    { number: "AGG", ammount: 2200, companyId: 2 },
+    { number: "AL", ammount: 500, companyId: 3 },
+    { number: "ABLLL", ammount: 3000, companyId: 1 },
+    { number: "AS", ammount: 3500, companyId: 1 },
+    { number: "AB", ammount: 3000, companyId: 3 },
+    { number: "ADD", ammount: 3070, companyId: 2 },
+    { number: "AB", ammount: 3000, companyId: 1 },
+    { number: "AO", ammount: 3000, companyId: 1 },
+    { number: "AJJJ", ammount: 3700, companyId: 2 },
+    { number: "KB", ammount: 1000, companyId: 1 },
+    { number: "ABSSS", ammount: 3700, companyId: 2 },
+    { number: "KLB", ammount: 700, companyId: 1 },
+    { number: "SSB", ammount: 9990, companyId: 3 },
+  ];
+
+   const handleClick = (e) => {
+    console.log("klikam element", e.currentTarget.tagName)
+   }
 
   return (
     <ProtectedLayout>
@@ -47,6 +68,7 @@ const Settings = () => {
           Sign out
         </Button>
         {/* </form> */}
+      
       </div>
     </ProtectedLayout>
   );

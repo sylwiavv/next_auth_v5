@@ -1,19 +1,17 @@
 'use client'
 
-import React, {useState} from 'react';
-import {CardWrapper} from "@/components/auth/CardWrapper";
+import { reset } from "@/actions/reset";
+import { CardWrapper } from "@/components/auth/CardWrapper";
+import { FormError } from "@/components/auth/FormError";
+import { FormSuccess } from "@/components/auth/FormSuccess";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { ResetSchema } from "@/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState, useTransition } from 'react';
+import { useForm } from "react-hook-form";
 import * as z from "zod";
-import {ResetSchema} from "@/schemas";
-import {useForm} from "react-hook-form";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {FormError} from "@/components/auth/FormError";
-import {FormSuccess} from "@/components/auth/FormSuccess";
-import {login} from "@/actions/login";
-import {useTransition} from "react";
-import {reset} from "@/actions/reset";
 
 export const ResetForm = () => {
     const [isPending, startTransition] = useTransition()
@@ -23,7 +21,8 @@ export const ResetForm = () => {
     const cardWrapperPropsValues = {
         headerLabel: "Forgot your password",
         backButtonHref: "/auth/login",
-        backButtonLabel: "Back to login"
+        backButtonLabel: "Back to login",
+        showSocial: false
     };
 
     const {headerLabel, backButtonLabel, backButtonHref, showSocial} = cardWrapperPropsValues;
@@ -32,7 +31,7 @@ export const ResetForm = () => {
         resolver: zodResolver(ResetSchema),
         defaultValues: {
             email: "",
-            password: ""
+            // password: ""
         }
     });
 

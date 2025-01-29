@@ -36,7 +36,7 @@ export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
                 return true
             }
 
-            const existingUser = await getUserById(user.id as s);
+            const existingUser = await getUserById(user.id as string);
 
             // Prevent SignIn without email verification
             if (!existingUser?.emailVerified) {
@@ -63,7 +63,7 @@ export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
             }
 
             if (token.role && session.user) {
-                session.user.role = token.role;
+                // session.user.role = token.role;
             }
 
             return session;

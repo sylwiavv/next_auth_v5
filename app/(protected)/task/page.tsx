@@ -1,9 +1,7 @@
 "use server";
 
-import { Task } from "../_componentss/task";
-
 const TaskPage = () => {
-  return <div className="p-4"><Task /></div>
+  return <div className="p-4">Ts</div>
 };
 
 export default TaskPage;
