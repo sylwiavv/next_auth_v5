@@ -1,11 +1,14 @@
 module.exports = {
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'i.pinimg.com',
-          port: '',
-        },
-      ],
+    eslint: {
+        ignoreDuringBuilds: true,
     },
-  }
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'i.pinimg.com',
+                port: '',
+            },
+        ],
+    },
+}

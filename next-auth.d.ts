@@ -1,20 +1,20 @@
-import NextAuth from "next-auth"
+import 'next-auth'
 
-type UserRole = "ADMIN" | "USER"
+type UserRole = 'ADMIN' | 'USER'
 
-declare module "next-auth" {
+declare module 'next-auth' {
     /**
      * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
      */
     interface jwt {
         user: {
-            role: UserRole;
+            role: UserRole
         }
     }
 
     interface session {
         user: {
-            role: UserRole;
+            role: UserRole
         }
     }
 }

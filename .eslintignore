@@ -1,0 +1,7 @@
+.next/
+node_modules/
+lib/
+dist/
+build/
+next.config.js
+tailwind.config.ts

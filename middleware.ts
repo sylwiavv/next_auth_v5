@@ -1,21 +1,27 @@
-import authConfig from "@/auth.config"
-import NextAuth from "next-auth"
-import { DEFAULT_LOGIN_REDIRECT, DEFAULT_LOGIN_PAGE, apiAuthPrefix, authRoutes, publicRoutes } from "@/routes"
+import authConfig from '@/auth.config'
+import NextAuth from 'next-auth'
+import {
+    DEFAULT_LOGIN_REDIRECT,
+    DEFAULT_LOGIN_PAGE,
+    apiAuthPrefix,
+    authRoutes,
+    publicRoutes,
+} from '@/routes'
 
-const {auth} = NextAuth(authConfig)
+const { auth } = NextAuth(authConfig)
 
 export default auth((req) => {
-    const { nextUrl } = req;
-    const isLoggedIn = !!req.auth;
+    const { nextUrl } = req
+    const isLoggedIn = !!req.auth
 
     // console.log("ROUTE121:", req, isLoggedIn)
 
-    const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-    const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+    const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
+    const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
     const isAuthRoute = authRoutes.includes(nextUrl.pathname)
 
     if (isApiAuthRoute) {
-        return null;
+        return null
     }
 
     if (isAuthRoute) {
@@ -23,14 +29,14 @@ export default auth((req) => {
             // nextUrl lie a second parameter create absolute URL localhost:300/default
             return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
         }
-        return null;
+        return null
     }
 
     if (!isLoggedIn && !isPublicRoute) {
         return Response.redirect(new URL(DEFAULT_LOGIN_PAGE, nextUrl))
     }
 
-    return null;
+    return null
 })
 
 export const config = {

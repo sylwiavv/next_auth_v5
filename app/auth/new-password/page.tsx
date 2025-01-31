@@ -1,10 +1,8 @@
-import React from 'react';
-import {NewPasswordForm} from "@/components/auth/NewPassword/NewPasswordForm";
+import React from 'react'
+import { NewPasswordForm } from '@/components/auth/NewPassword/NewPasswordForm'
 
 const NewPasswordPage = () => {
-    return (
-        <NewPasswordForm />
-    );
+    return <NewPasswordForm />
 }
 
-export default NewPasswordPage;
+export default NewPasswordPage

@@ -23,55 +23,40 @@
 // }
 
 // export default Settings
-"use client";
+'use client'
 // CLIENT COMPONENT
-import { logout } from "@/actions/logout";
-import UserAvatar from "@/components/auth/UserAvatar/UserAvatar";
-import { Button } from "@/components/ui/button";
-import ProtectedLayout from "./ProtectedLayout";
+import UserAvatar from '@/components/auth/UserAvatar/UserAvatar'
+import { Button } from '@/components/ui/button'
+import { useSession } from 'next-auth/react'
+import { logout } from '../../../actions/logout'
+import ProtectedLayout from './ProtectedLayout'
 
 const Settings = () => {
-  // const session = useSession(); // `useSession` must be wrapped in a <SessionProvider />
-  const onClick = () => {
-    logout();
-  };
+    // const session = useSession(); // `useSession` must be wrapped in a <SessionProvider />
+    const session = useSession()
 
-  const inovices = [
-    { number: "AB", ammount: 3000, companyId: 3 },
-    { number: "AC", ammount: 200, companyId: 1 },
-    { number: "AGG", ammount: 2200, companyId: 2 },
-    { number: "AL", ammount: 500, companyId: 3 },
-    { number: "ABLLL", ammount: 3000, companyId: 1 },
-    { number: "AS", ammount: 3500, companyId: 1 },
-    { number: "AB", ammount: 3000, companyId: 3 },
-    { number: "ADD", ammount: 3070, companyId: 2 },
-    { number: "AB", ammount: 3000, companyId: 1 },
-    { number: "AO", ammount: 3000, companyId: 1 },
-    { number: "AJJJ", ammount: 3700, companyId: 2 },
-    { number: "KB", ammount: 1000, companyId: 1 },
-    { number: "ABSSS", ammount: 3700, companyId: 2 },
-    { number: "KLB", ammount: 700, companyId: 1 },
-    { number: "SSB", ammount: 9990, companyId: 3 },
-  ];
+    const onClick = () => {
+        logout()
+    }
 
-   const handleClick = (e) => {
-    console.log("klikam element", e.currentTarget.tagName)
-   }
+    console.log(session)
+    const sessionUser = session.data?.user
 
-  return (
-    <ProtectedLayout>
-      <div className="break-all flex flex-col">
-        <UserAvatar imageSrc="https://i.pinimg.com/736x/86/cf/d0/86cfd0cd2e5bb21b377b972f9931e939.jpg" />
+    return (
+        <ProtectedLayout>
+            <div className="break-all flex flex-col">
+                <p>{sessionUser.name}</p>
+                <p>{sessionUser.email}</p>
+                <UserAvatar imageSrc={sessionUser.image} />
 
-        {/* <form> */}
-        <Button className="my-2" variant="secondary" onClick={onClick}>
-          Sign out
-        </Button>
-        {/* </form> */}
-      
-      </div>
-    </ProtectedLayout>
-  );
-};
+                {/* <form> */}
+                <Button className="my-2" variant="secondary" onClick={onClick}>
+                    Sign out
+                </Button>
+                {/* </form> */}
+            </div>
+        </ProtectedLayout>
+    )
+}
 
-export default Settings;
+export default Settings
