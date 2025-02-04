@@ -1,11 +1,10 @@
 'use client'
 
-import React, { useState } from 'react'
+import { register } from '@/actions/register'
 import { CardWrapper } from '@/components/auth/CardWrapper'
-import * as z from 'zod'
-import { RegisterSchema } from '@/schemas'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { FormError } from '@/components/auth/FormError'
+import { FormSuccess } from '@/components/auth/FormSuccess'
+import { Button } from '@/components/ui/button'
 import {
     Form,
     FormControl,
@@ -15,13 +14,11 @@ import {
     FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { FormError } from '@/components/auth/FormError'
-import { FormSuccess } from '@/components/auth/FormSuccess'
-import { login } from '@/actions/login'
-import { useTransition } from 'react'
-import { register } from '@/actions/register'
-import { SeoH1 } from '@/ui/SeoH1'
+import { RegisterSchema } from '@/schemas'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState, useTransition } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
 
 export const RegisterForm = () => {
     const [isPending, startTransition] = useTransition()
@@ -57,7 +54,7 @@ export const RegisterForm = () => {
                 setSuccess(data?.success)
 
                 if (data?.success) {
-                    console.log(form)
+                    // console.log(form)
                     form.reset()
                 }
             })

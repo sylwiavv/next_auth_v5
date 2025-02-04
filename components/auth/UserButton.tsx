@@ -10,6 +10,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useCurrentUser } from '@/hooks/useCurrentUser'
+import { ExitIcon } from '@radix-ui/react-icons'
 import { FaUser } from 'react-icons/fa'
 import { LogoutButton } from './logout-button'
 
@@ -32,7 +33,10 @@ export const UserButton = () => {
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <LogoutButton>
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <ExitIcon className="w-4 h-4 mr-1" />
+                        Logout
+                    </DropdownMenuItem>
                 </LogoutButton>
             </DropdownMenuContent>
         </DropdownMenu>

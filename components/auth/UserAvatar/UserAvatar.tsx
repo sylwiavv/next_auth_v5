@@ -1,4 +1,3 @@
-import React from 'react'
 import Image from 'next/image'
 
 interface UserAvatarProps {
@@ -9,6 +8,7 @@ const UserAvatar = ({ imageSrc }: UserAvatarProps) => {
     return (
         <div className="h-24 w-24 overflow-hidden rounded-full relative shadow-lg transition-all">
             <Image
+                priority={true}
                 className="absolute top-0 left-0 object-cover"
                 // className="absolute -top-7 left-0 object-cover"
                 src={imageSrc}

@@ -3,8 +3,6 @@ import { NavbarLinks } from './NavbarLinks'
 
 export const Navbar = () => {
     // const currentUser = useCurrentUser();
-    const user = { name: 'bob', age: 26 }
-    console.log(user)
 
     return (
         <div className="flex justify-between items-center flex-wrap p-4 gap-y-4 gap-x-4 text-gray-900">

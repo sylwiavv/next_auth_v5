@@ -27,27 +27,26 @@
 // CLIENT COMPONENT
 import UserAvatar from '@/components/auth/UserAvatar/UserAvatar'
 import { Button } from '@/components/ui/button'
-import { useSession } from 'next-auth/react'
 import { logout } from '../../../actions/logout'
-import ProtectedLayout from './ProtectedLayout'
+import { useCurrentUser } from '../../../hooks/useCurrentUser'
 
 const Settings = () => {
     // const session = useSession(); // `useSession` must be wrapped in a <SessionProvider />
-    const session = useSession()
+    const user = useCurrentUser()
 
     const onClick = () => {
         logout()
     }
 
-    console.log(session)
-    const sessionUser = session.data?.user
-
+    if (!user) {
+        return <p>Loading..</p>
+    }
     return (
-        <ProtectedLayout>
+        <>
             <div className="break-all flex flex-col">
-                <p>{sessionUser.name}</p>
-                <p>{sessionUser.email}</p>
-                <UserAvatar imageSrc={sessionUser.image} />
+                <p>{user?.name}</p>
+                <p>{user?.email}</p>
+                <UserAvatar imageSrc={user?.image as string} />
 
                 {/* <form> */}
                 <Button className="my-2" variant="secondary" onClick={onClick}>
@@ -55,7 +54,7 @@ const Settings = () => {
                 </Button>
                 {/* </form> */}
             </div>
-        </ProtectedLayout>
+        </>
     )
 }
 

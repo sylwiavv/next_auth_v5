@@ -3,12 +3,18 @@ module.exports = {
         ignoreDuringBuilds: true,
     },
     images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'i.pinimg.com',
-                port: '',
-            },
-        ],
+        domains: ['i.pinimg.com', 'lh3.googleusercontent.com'],
     },
+    // images: {
+    //     remotePatterns: [
+    //         {
+    //             protocol: 'https',
+    //             hostname: 'i.pinimg.com',
+    //         },
+    //         {
+    //             protocol: 'https',
+    //             hostname: 'lh3.googleusercontent.com',
+    //         },
+    //     ],
+    // },
 }

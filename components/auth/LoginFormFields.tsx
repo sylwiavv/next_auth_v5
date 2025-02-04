@@ -8,8 +8,18 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
+import { UseFormReturn } from 'react-hook-form/dist/types/form'
 
-const LoginFormFields = ({ form, isPending }) => {
+export type LoginFormFieldsProps = {
+    form: UseFormReturn<
+        { email: string; password: string; code?: string | undefined },
+        any,
+        undefined
+    >
+    isPending: boolean
+}
+
+const LoginFormFields = ({ form, isPending }: LoginFormFieldsProps) => {
     return (
         <>
             <FormField

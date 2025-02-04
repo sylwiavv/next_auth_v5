@@ -6,8 +6,12 @@ import {
     FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { LoginFormFieldsProps } from './LoginFormFields'
 
-const LoginFormTwoFactorFields = ({ form, isPending }) => {
+const LoginFormTwoFactorFields = ({
+    form,
+    isPending,
+}: LoginFormFieldsProps) => {
     return (
         <FormField
             control={form.control}
