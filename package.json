@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "eslint \"./**/*.{js,jsx,ts,tsx}\"",
         "lint:fix": "eslint --fix \"./**/*.{js,jsx,ts,tsx}\"",
-        "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md}\" --config ./.prettierrc.json"
+        "format": "prettier --write \"./**/*.{js,jsx,ts,tsx,css,md}\" --config ./.prettierrc.json",
+        "postinstall": "prisma generate"
     },
     "dependencies": {
         "@auth/prisma-adapter": "^2.4.2",
