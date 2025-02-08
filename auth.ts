@@ -4,6 +4,7 @@ import { getUserById } from '@/data/user'
 import { db } from '@/lib/db'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import NextAuth from 'next-auth'
+import { getAccountByUserId } from './data/account'
 import { UserRole } from './next-auth'
 
 export const {
@@ -93,7 +94,13 @@ export const {
 
             if (!existingUser) return token
 
+            const existingAccount = await getAccountByUserId(existingUser.id)
+
+            token.isOAuth = !!existingAccount
+
             token.role = existingUser.role
+            token.name = existingUser.name
+            token.email = existingUser.email
             token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
 
             return token
