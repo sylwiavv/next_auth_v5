@@ -31,8 +31,18 @@ export default auth((req) => {
     }
 
     if (!isLoggedIn && !isPublicRoute) {
+        let callbackUrl = nextUrl.pathname
+        if (nextUrl.search) {
+            callbackUrl += nextUrl.search
+        }
+        const encodedCallbackUrl = encodeURIComponent(callbackUrl)
         // Redirect to login page if not logged in
-        return Response.redirect(new URL(DEFAULT_LOGIN_PAGE, nextUrl))
+        return Response.redirect(
+            new URL(
+                `${DEFAULT_LOGIN_PAGE}?callbackUrl=${encodedCallbackUrl}`,
+                nextUrl
+            )
+        )
     }
 
     return // Return void if no action needed
